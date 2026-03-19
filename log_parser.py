@@ -20,7 +20,7 @@ with open(file_path, 'r') as f: #Add encoding?
     for line in log_txt:
         match = re.search(r"Failed password", line)
         if match: #TODO: add other user login ssh failure types
-            ip_match = re.search(r"from (\d+\.\d+\.\d+\.\d+)", line)
+            ip_match = re.search(r"from (\d+\.\d+\.\d+\.\d+)", line) #TODO:ProTip- consider a null check
             ip = ip_match.group(1)
             print(ip)
             #print(f"-> {line}")
