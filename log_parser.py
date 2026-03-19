@@ -16,5 +16,11 @@ script_dir = os.path.dirname(__file__)
 
 file_path = os.path.join(script_dir, "logFiles/sample_auth.log")
 with open(file_path, 'r') as f: #Add encoding?
-    log_txt = f.read()
-    print(log_txt)
+    log_txt = f.readlines()     #print(log_txt)
+    for line in log_txt:
+        match = re.search(r"Failed password", line)
+        if match: #TODO: add other user login ssh failure types
+            ip_match = re.search(r"from (\d+\.\d+\.\d+\.\d+)", line)
+            ip = ip_match.group(1)
+            print(ip)
+            #print(f"-> {line}")
