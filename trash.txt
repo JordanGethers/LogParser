@@ -1,0 +1,8 @@
+Mar 19 00:00:01 ubuntu-server CRON[1001]: (root) CMD (run-parts /etc/cron.daily)
+Mar 19 00:17:01 ubuntu-server CRON[1023]: (root) CMD (/usr/lib/ubuntu-advantage/ua_update_messaging.sh)
+Mar 19 01:00:01 ubuntu-server CRON[1101]: (root) CMD (find /var/tmp -mtime +7 -delete)
+Mar 19 02:15:44 ubuntu-server kernel: [UFW BLOCK] IN=eth0 OUT= SRC=203.0.113.42 DST=10.0.0.1 PROTO=TCP DPT=22
+Mar 19 02:15:45 ubuntu-server kernel: [UFW BLOCK] IN=eth0 OUT= SRC=203.0.113.42 DST=10.0.0.1 PROTO=TCP DPT=22
+Mar 19 03:00:01 ubuntu-server CRON[1201]: (root) CMD (/usr/sbin/logrotate /etc/logrotate.conf)
+...and so on for the full day
+.
