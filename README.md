@@ -13,27 +13,11 @@ attempts, groups them by IP address, and outputs a brute-force report as CSV.
 - Outputs timestamped CSV report
 - Configurable threshold via CLI flag
 
-## Installation
-
-\```bash
-git clone https://github.com/yourusername/log-parser.git
-cd log-parser
-pip install -r requirements.txt
-\```
 
 ## Usage
 
 \```bash
 python log_parser.py --file auth.log --threshold 5
-\```
-
-## Example Output
-
-\```
-IP Address       Failed Attempts
-192.168.1.105    47
-10.0.0.23        31
-172.16.0.8       12
 \```
 
 ## What I Learned
