@@ -47,8 +47,37 @@
 - [ ] Sort IPs by fail count descending with `sorted(..., reverse=True)`
 - [ ] Output results to CSV with a timestamp column using the `csv` module
 
+### Session — 2026-03-23
+
+#### Accomplished
+- Expanded the failure match regex to also capture `"authentication failure"` and `"invalid user"` in addition to `"Failed password"`
+- Added `re.IGNORECASE` flag so matches work regardless of letter case
+- Added a null check (`if ip_match:`) to prevent crash when a matched line has no IP address
+- Added a second capture group to the IP regex (`rhost=(\d+\.\d+\.\d+\.\d+)`) to catch `pam_unix` style log lines
+- Fixed IP extraction to use `ip_match.group(1) or ip_match.group(2)` so both IP formats are handled
+- Replaced `re.search()` in the loop with `re.compile()` — pattern is now compiled once outside the loop as `FAILURE_PATTERN`
+
+#### Concepts Covered
+- `re.IGNORECASE` — flag that makes regex match regardless of uppercase/lowercase
+- `|` in regex — means "or", matches any one of multiple alternatives
+- Multiple capture groups — each set of `()` is a numbered group; `.group(1)`, `.group(2)` etc.
+- Why only one group matches when using `|` — the other group returns `None`
+- `value1 or value2` — Python returns the first truthy value; used to pick whichever group matched
+- `re.compile()` vs `re.search()` in a loop — compile parses the pattern once; search re-parses on every call
+- `ALL_CAPS` naming convention for compiled patterns — signals it's a constant
+
+#### Decisions Made
+- Compiled pattern named `FAILURE_PATTERN` defined above the file open block, separate from loop logic
+- Old `re.search()` line preserved as a comment with explanation of why to avoid it in loops
+- `group(1) or group(2)` chosen over more complex alternatives — readable and appropriate for this stage
+
+#### Next Steps / TODOs
+- [ ] Apply `re.compile()` to the IP regex as well (`IP_PATTERN`)
+- [ ] Explore named groups `(?P<name>...)` as a cleaner alternative to numbered groups
+- [ ] Consider logging lines that matched but had no IP (currently silently skipped)
+
 ### Known Issues / TODOs
-- `re.search(r"")` placeholder on line 21 needs to be completed with the actual pattern
+- ~~`re.search(r"")` placeholder needs to be completed~~ — resolved
 
 ---
 
